@@ -152,6 +152,278 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-安全学笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="安全学笔记"><a href="#安全学笔记" class="headerlink" title="安全学笔记"></a>安全学笔记</h1><h3 id="Security-Requirements（安全要求）"><a href="#Security-Requirements（安全要求）" class="headerlink" title="Security Requirements（安全要求）"></a>Security Requirements（安全要求）</h3><h4 id="Three-Main-Requirements"><a href="#Three-Main-Requirements" class="headerlink" title="Three Main Requirements"></a>Three Main Requirements</h4><ul>
+<li>Confidentiality（机密性）</li>
+</ul>
+<p>□ Keeping it in secret</p>
+<ul>
+<li>Integrity（完整性）</li>
+</ul>
+<p>□ Keeping it unmodified/original</p>
+<ul>
+<li>Non-repudiation（不否认性）</li>
+</ul>
+<p>□ Making it accountable</p>
+<h3 id="Motives-for-Cryptography（密码学动机）"><a href="#Motives-for-Cryptography（密码学动机）" class="headerlink" title="Motives for Cryptography（密码学动机）"></a>Motives for Cryptography（密码学动机）</h3><p>■ Prevent others from reading our data</p>
+<p>■ Stop others from changing our data</p>
+<p>■ Verify data integrity（验证数据完整性）</p>
+<p>■ Identify forgery（识别伪造）</p>
+<p>■ Proof of identity（身份证明）</p>
+<p>Principal Ideas</p>
+<p>■ Randomize data into un-comprehensible form</p>
+<p>数据随机化</p>
+<p>■ Recovery un-comprehensible data back to plaintext</p>
+<p>恢复数据到明文</p>
+<p>■ Randomization and Recovery are linked with unique secrets</p>
+<p>■ Different secrets lead to different Randomization/Recovery results</p>
+<p>■ Impossible to deduct secrets from ciphertext/plaintext</p>
+<h3 id="Symmetric-Key-Cryptography（对称密码学）"><a href="#Symmetric-Key-Cryptography（对称密码学）" class="headerlink" title="Symmetric Key Cryptography（对称密码学）"></a>Symmetric Key Cryptography（对称密码学）</h3><p>■ Plaintext be encrypted to ciphertext（明文加密到密文）</p>
+<p>■ Ciphertext be decrypted back to the original plaintext（密文解密到明文）</p>
+<p>■ The same secret for encryption and decryption（加密与解密）</p>
+<p><img src="../typora_picture/image-20220102105556146.png" alt="image-20220102105556146"></p>
+<p>■ Let <em>m</em> be the plaintext, <em>s</em> be the secret.（m明文，s信息秘密）</p>
+<p>■ <em>p</em> = <em>Enc</em>(<em>s</em>, <em>m</em>) be the encryption process（加密过程）</p>
+<p>■ <em>m</em> = <em>Dec</em>(<em>s</em>, <em>p</em>) be the decryption process（解密过程）</p>
+<p><img src="../typora_picture/image-20220102110206248.png" alt="image-20220102110206248"></p>
+<h4 id="■-Types-by-Encryption-Operation-used"><a href="#■-Types-by-Encryption-Operation-used" class="headerlink" title="■ Types by Encryption Operation used"></a>■ Types by Encryption Operation used</h4><p>□ Substitution  替代</p>
+<p>□ Transposition  转位</p>
+<p>□ Product  生产</p>
+<h4 id="■-Types-by-way-in-which-palintex-is-processed"><a href="#■-Types-by-way-in-which-palintex-is-processed" class="headerlink" title="■ Types by way in which palintex is processed"></a>■ Types by way in which palintex is processed</h4><p>□ block</p>
+<p>□ stream</p>
+<h5 id="Caesar-Cipher-Substitution-Cipher-凯莎替换密码"><a href="#Caesar-Cipher-Substitution-Cipher-凯莎替换密码" class="headerlink" title="Caesar Cipher - Substitution Cipher 凯莎替换密码"></a>Caesar Cipher - Substitution Cipher 凯莎替换密码</h5><p>用第三个字母替换</p>
+<p>example  ： meet me after the toga party</p>
+<p>PHHW PH DIWHU WKH WRJD SDUWB</p>
+<p>■ can define transformation as:</p>
+<p>a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
+<p>D E F G H I J K L M N O P Q R S T U V W X Y Z A B C</p>
+<p>■ mathematically give each letter a number</p>
+<p>a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
+<p>0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25</p>
+<p>​                <strong><em>c</em> = <em>E</em>(<em>p</em>) = (<em>p</em> + <em>k</em>)<em>mod</em>(26)</strong> </p>
+<p>​                    <strong><em>p</em> = <em>D</em>(<em>c</em>) = (<em>c</em> <em>−</em> <em>k</em>)<em>mod</em>(26)</strong> </p>
+<h5 id="Block-Cipher-块密码"><a href="#Block-Cipher-块密码" class="headerlink" title="Block Cipher   块密码"></a>Block Cipher   块密码</h5><p>加密解密过程：（图为解密）</p>
+<p><img src="../typora_picture/image-20220102111508556.png" alt="image-20220102111508556"></p>
+<h4 id="基本实现技术"><a href="#基本实现技术" class="headerlink" title="基本实现技术"></a>基本实现技术</h4><p><strong>■ Substitution    替换</strong></p>
+<p>■ A binary word is replaced by some other binary word</p>
+<p>■ The whole substitution function forms the key</p>
+<p>■ If use n bit words, The key space is 2<em>n</em>! </p>
+<p>■ Similar to lookup table, with n address lines (hence 2n addresses),</p>
+<p>each n bits wide being the output value</p>
+<p><strong>■ Permutation    排列</strong></p>
+<p>■ A binary word has its bits reordered (permuted)</p>
+<p>■ The re-ordering forms the key If we use n bit words,</p>
+<p>■ The key space is n! (Less secure than substitution)</p>
+<p>■ This is equivalent to a wire-crossing in practice 这相当于实践中的导线交叉</p>
+<h5 id="Substitution-permuation-Network-替代衰减网络"><a href="#Substitution-permuation-Network-替代衰减网络" class="headerlink" title="Substitution-permuation Network   替代衰减网络"></a>Substitution-permuation Network   替代衰减网络</h5><p><strong>□ S-boxes</strong> Provide confusion of input bits</p>
+<p><strong>□ P-boxes</strong> Provide diffusion across s-box inputs</p>
+<p><strong>Confusion</strong></p>
+<p>A technique that seeks to make the relationship between the statistics</p>
+<p>of the ciphertext and the value of the encryption keys as complex as</p>
+<p>possible. Cipher uses key and plaintext. Confusion makes sure the</p>
+<p>ciphertext give no clues to the plain text</p>
+<p>混淆：一种试图使密文的统计数据和加密密钥的值之间的关系尽可能复杂的技术。密码使用键和明文。混淆确保密文没有提供关于纯文本的线索</p>
+<p><strong>Diffusion</strong></p>
+<p>A technique that seeks to obscure the statistical structure of the</p>
+<p>plaintext by spreading out the influence of each individual plaintext</p>
+<p>digit over many ciphertext digits.</p>
+<p>扩散：一种试图通过传播每个明文数字对许多密文数字的影响来掩盖明文的统计结构的技术。</p>
+<h4 id="Data-Encryption-Standard-DES-数据加密标准"><a href="#Data-Encryption-Standard-DES-数据加密标准" class="headerlink" title="Data Encryption Standard (DES)数据加密标准"></a>Data Encryption Standard (DES)数据加密标准</h4><p>■ most widely used block cipher in world</p>
+<p>■ adopted in 1977 by NBS (now NIST) as FIPS PUB 46</p>
+<p>■ encrypts 64-bit data using 56-bit key</p>
+<p>■ has widespread use</p>
+<p>■ has been considerable controversy over its security</p>
+<p><img src="../typora_picture/image-20220102115440001.png" alt="image-20220102115440001"></p>
+<p><img src="../typora_picture/image-20220102115607334.png" alt="image-20220102115607334"></p>
+<p><img src="../typora_picture/image-20220102115723880.png" alt="image-20220102115723880"></p>
+<p><strong>DES Round Structure</strong></p>
+<p>■ uses two 32-bit L &amp; R halves</p>
+<p>■ Formalization</p>
+<p><em>L**i</em> = <em>R<strong>i</strong>−</em>1 </p>
+<p><em>R**i</em> = <em>L<strong>i</strong>−</em>1 ⊗ <em>F</em>(<em>R<strong>i</strong>−</em>1,<em>K**i</em>) </p>
+<p><img src="../typora_picture/image-20220102120029609.png" alt="image-20220102120029609"></p>
+<p>■ F takes 32-bit R half and 48-bit subkey</p>
+<p>□ expands R to 48-bits using perm E</p>
+<p>□ adds to subkey using XOR</p>
+<p>□ passes through 8 S-boxes to get 32-bit result</p>
+<p>□ finally permutes using 32-bit perm P</p>
+<p><img src="../typora_picture/image-20220102120255275.png" alt="image-20220102120255275"></p>
+<h5 id="3DES"><a href="#3DES" class="headerlink" title="3DES"></a>3DES</h5><p>■ three keys, <em>k</em>1, <em>k</em>2, and <em>k</em>3 </p>
+<p>■ <strong><em>p</em> = <em>enc</em>(<em>k</em>3, <em>dec</em>(<em>k</em>2, <em>enc</em>(<em>k</em>1, <em>m</em>))</strong></p>
+<p>■ when <em>k</em>1 = <em>k</em>2, it is equivalent to DES</p>
+<h5 id="AES-Requirements"><a href="#AES-Requirements" class="headerlink" title="AES Requirements"></a>AES Requirements</h5><p>AES had to be a private key algorithm. It had to use a shared</p>
+<p>secret key</p>
+<p><img src="../typora_picture/image-20220102143849519.png" alt="image-20220102143849519"></p>
+<p><img src="../typora_picture/image-20220102143926444.png" alt="image-20220102143926444"></p>
+<h4 id="Stream-Ciphers-流密码"><a href="#Stream-Ciphers-流密码" class="headerlink" title="Stream Ciphers  流密码"></a>Stream Ciphers  流密码</h4><p>■ process message bit by bit (as a stream)</p>
+<p>■ have a pseudo random keystream combined (XOR) with plaintext</p>
+<p>bit by bit</p>
+<p>■ randomness of stream key completely destroys statistically</p>
+<p>properties in message</p>
+<p><em>C**i</em> = <em>M**i</em> ⊗ <em>StreamKey**i</em>    （i下标）</p>
+<p>■ but must never reuse stream key otherwise can recover messages</p>
+<p>(cf book cipher)</p>
+<p>结构：</p>
+<p><img src="../typora_picture/image-20220102144405314.png" alt="image-20220102144405314"></p>
+<p>流密码的属性</p>
+<p>■ some design considerations are:</p>
+<p>​    □ long period with no repetitions    不重复</p>
+<p>​    □ statistically random    统计随机</p>
+<p>​    □ depends on large enough key large linear complexity    依赖线性复杂度</p>
+<p>■ properly designed, can be as secure as a block cipher with same</p>
+<p>size key but usually simpler &amp; faster</p>
+<h4 id="RC4"><a href="#RC4" class="headerlink" title="RC4"></a>RC4</h4><p>■ a proprietary cipher owned by RSA DSI    专有密码</p>
+<p>■ another Ron Rivest design, simple but effective    简单高效</p>
+<p>■ variable key size, byte-oriented stream cipher    面向字节</p>
+<p>■ widely used (web SSL/TLS, wireless WEP)    </p>
+<p>■ key forms random permutation of all 8-bit values</p>
+<p>■ uses that permutation to scramble input info processed a byte at a</p>
+<p>time    使用排列争夺输入信息处理一个字节</p>
+<h5 id="RC4-Key-Schedule"><a href="#RC4-Key-Schedule" class="headerlink" title="RC4 Key Schedule"></a>RC4 Key Schedule</h5><p>■ starts with an array S of numbers: 0..255</p>
+<p>■ use key to well and truly shuffle</p>
+<p>■ S forms internal state of the cipher</p>
+<p><img src="../typora_picture/image-20220102145008936.png" alt="image-20220102145008936"></p>
+<h5 id="RC4-Encryption-加密过程"><a href="#RC4-Encryption-加密过程" class="headerlink" title="RC4 Encryption    加密过程"></a>RC4 Encryption    加密过程</h5><p>■ encryption continues shuffling array values</p>
+<p>■ sum of shuffled pair selects ”stream key” value from permutation</p>
+<p>■ XOR S[t] with next byte of message to en/decrypt</p>
+<p><img src="../typora_picture/image-20220102145142749.png" alt="image-20220102145142749"></p>
+<h5 id="RC4-Overview"><a href="#RC4-Overview" class="headerlink" title="RC4 Overview"></a>RC4 Overview</h5><p><img src="../typora_picture/image-20220102145238366.png" alt="image-20220102145238366"></p>
+<h3 id="Cipher-Modes-密码模式"><a href="#Cipher-Modes-密码模式" class="headerlink" title="Cipher Modes    密码模式"></a>Cipher Modes    密码模式</h3><h4 id="Rationale基本原理"><a href="#Rationale基本原理" class="headerlink" title="Rationale基本原理"></a>Rationale基本原理</h4><p>■ a way to encrypt/decrypt large data with block cipher</p>
+<p>一种用块密码加密解密大数据的方法</p>
+<p>■ provide different security features for encryption</p>
+<p>为加密提供不同的安全特性</p>
+<h4 id="modes"><a href="#modes" class="headerlink" title="modes"></a>modes</h4><p>■ ECB(Electronic Codebook)    电子译码本</p>
+<p>■ CBC(Cipher Block Chaining)    密码块锁</p>
+<p>■ CFB(Cipher Feedback)    密码反馈</p>
+<p>■ OFB(Output Feedback)    输出反馈</p>
+<p>■ CTR(Counter)    计数器</p>
+<h4 id="ECB-电子译码本"><a href="#ECB-电子译码本" class="headerlink" title="ECB    电子译码本"></a>ECB    电子译码本</h4><p>■ message is broken into independent blocks which are encrypted      独立加密块</p>
+<p>■ each block is a value which is substituted, like a codebook, hence</p>
+<p>name    没个块被替换</p>
+<p>■ each block is encoded independently of the other blocks    独立加密</p>
+<p><strong><em>C</em>i = <em>enc</em>(<em>K</em>1, <em>m</em>i)</strong></p>
+<p>加密解密过程：</p>
+<p><img src="../typora_picture/image-20220102150734510.png" alt="image-20220102150734510"></p>
+<p>**Padding    **填充过程</p>
+<p>■ Last Byte as the Padding Indicator    最后一个字节作为填充提示符</p>
+<p>■ PI means the number of padded bytes    pi是被填充的字节数</p>
+<p><img src="../typora_picture/image-20220102151014488.png" alt="image-20220102151014488"></p>
+<p><strong>例子</strong></p>
+<p><img src="../typora_picture/image-20220102151237595.png" alt="image-20220102151237595"></p>
+<p><strong>ECB的优缺点：</strong></p>
+<p>消息重复显示在密文，消息对齐，特别是数据。图形或者变化很少的消息。加密的块是独立的。</p>
+<h4 id="Cipher-Block-Chaining-CBC-区块链"><a href="#Cipher-Block-Chaining-CBC-区块链" class="headerlink" title="Cipher Block Chaining (CBC)区块链"></a>Cipher Block Chaining (CBC)区块链</h4><p>■ message is broken into blocks</p>
+<p>■ linked together in encryption operation</p>
+<p>■ each previous cipher blocks is chained with current plaintext block,</p>
+<p>hence name</p>
+<p>■ use Initial Vector (IV) to start process</p>
+<p><em>C**i</em> = <em>enc</em>(<em>K**i</em>,(<em>m**i</em> ⊗ <em>C<strong>i</strong>−</em>1) <em>C**−</em>1 = <em>IV</em></p>
+<p>■ uses: bulk data encryption, authentication</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ci = enc(Ki,(mi ⊗ Ci−1) C−1 = IV</span><br></pre></td></tr></table></figure>
+
+<p><img src="../typora_picture/image-20220102152716840.png" alt="image-20220102152716840"></p>
+<p><img src="../typora_picture/image-20220102152758889.png" alt="image-20220102152758889"></p>
+<p><strong>CBC优缺点</strong></p>
+<p>密文块取决于之前所有块；</p>
+<p>改变任何块都影响下面的所以块；</p>
+<p>需要初始化向量，需要知道发送者和接受者</p>
+<h4 id="Cipher-FeedBack-CFB-密码反馈"><a href="#Cipher-FeedBack-CFB-密码反馈" class="headerlink" title="Cipher FeedBack (CFB) 密码反馈"></a>Cipher FeedBack (CFB) 密码反馈</h4><p>■ message is treated as a stream of bits    消息比特流</p>
+<p>■ added to the output of the block cipher</p>
+<p>■ result is feed back for next stage (hence name)    反馈下一阶段</p>
+<p>■ standard allows any number of bit (1,8, 64 or 128 etc) to be feed</p>
+<p>back denoted CFB-1, CFB-8, CFB-64, CFB-128 etc</p>
+<p>■ most efficient to use all bits in block (64 or 128)</p>
+<p><em>C**i</em> = <em>m**i</em> ⊗ <em>enc</em>(<em>K</em>1, <em>C<strong>i</strong>−</em>1) </p>
+<p><em>C**−</em>1 = <em>IV</em></p>
+<p>■ uses: stream data encryption, authentication    数据流加密，认证</p>
+<p><img src="../typora_picture/image-20220102153544581.png" alt="image-20220102153544581"></p>
+<p><img src="../typora_picture/image-20220102153716243.png" alt="image-20220102153716243"></p>
+<p>CFB插入攻击：</p>
+<p><img src="../typora_picture/image-20220102153839467.png" alt="image-20220102153839467"></p>
+<p>CFB优缺点：</p>
+<p>适当数据到达位或字节；最常见的流模式；限制停止在每n为做块加密；</p>
+<h4 id="Output-FeedBack-OFB-输出反馈"><a href="#Output-FeedBack-OFB-输出反馈" class="headerlink" title="Output FeedBack (OFB)输出反馈"></a>Output FeedBack (OFB)输出反馈</h4><p>■ message is treated as a stream of bits    消息比特流</p>
+<p>■ output of cipher is added to message    输出密码到消息</p>
+<p>■ output is then feed back (hence name)</p>
+<p>■ feedback is independent of message</p>
+<p>■ can be computed in advance <em>C**i</em> = <em>m**i</em> ⊗ <em>O**i</em> </p>
+<p><em>O**i</em> = <em>enc</em>(<em>K</em>1, <em>O<strong>i</strong>−</em>1) </p>
+<p><em>O**−</em>1 = <em>IV</em></p>
+<p>■ uses: stream encryption on noisy channels    流加密噪声通道</p>
+<p><img src="../typora_picture/image-20220102154335254.png" alt="image-20220102154335254"></p>
+<p><img src="../typora_picture/image-20220102154352980.png" alt="image-20220102154352980"></p>
+<p>OFB优缺点</p>
+<p>■ bit errors do not propagate    位错误不传播</p>
+<p>■ more vulnerable to message stream modification    更容易受到信息流修改</p>
+<p>■ a variation of a Vernam cipher</p>
+<p>hence must never reuse the same sequence (key+IV)</p>
+<p>■ sender &amp; receiver must remain in sync</p>
+<p>■ originally specified with m-bit feedback</p>
+<p>■ subsequent research has shown that only full block feedback (ie</p>
+<p>CFB-64 or CFB-128) should ever be used</p>
+<h4 id="Counter-CTR-计数器"><a href="#Counter-CTR-计数器" class="headerlink" title="Counter (CTR)计数器"></a>Counter (CTR)计数器</h4><p>■ similar to OFB but encrypts counter value rather than any</p>
+<p>feedback value</p>
+<p>■ must have a different key &amp; counter value for every plaintext block</p>
+<p>(never reused)    必须要有不同的密钥和计数器值</p>
+<p><em>C**i</em> = <em>m**i</em> ⊗ <em>O**i</em> <em>O**i</em> = <em>enc</em>(<em>K</em>1, <em>i</em>) </p>
+<p>■ uses: high-speed network encryptions    高速网络加密</p>
+<p><img src="../typora_picture/image-20220102154814632.png" alt="image-20220102154814632"></p>
+<p>CTR优缺点：</p>
+<p>效率：可以并行加密</p>
+<p>■ efficiency</p>
+<p>□ can do parallel encryptions in h/w or s/w</p>
+<p>□ can preprocess in advance of need</p>
+<p>□ good for bursty high speed links</p>
+<p>■ random access to encrypted data blocks</p>
+<p>■ provable security (good as other modes)</p>
+<p>■ but must ensure never reuse key/counter values, otherwise could</p>
+<p>break (cf OFB)    必须确保不会重用密钥、计数器值。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/01/02/%E5%AE%89%E5%85%A8%E5%AD%A6%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-我的第一篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -305,7 +577,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2021 John Doe
+    		&copy; 2022 John Doe
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
